@@ -3,7 +3,7 @@ package com.zxq.Scala
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-class Test05_PVUV {
+object Test05_PVUV {
   def main(args: Array[String]): Unit = {
     val conf: SparkConf = new SparkConf().setMaster("local").setAppName("PVUV")
     val sc: SparkContext = new SparkContext(conf)
