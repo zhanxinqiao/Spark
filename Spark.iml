@@ -13,6 +13,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-2.11.12" level="application" />
+    <orderEntry type="library" name="scala-sdk-2.11.8" level="application" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-core_2.11:2.3.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avro:avro:1.7.7" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
@@ -104,7 +105,6 @@
     <orderEntry type="library" name="Maven: org.roaringbitmap:RoaringBitmap:0.7.45" level="project" />
     <orderEntry type="library" name="Maven: org.roaringbitmap:shims:0.7.45" level="project" />
     <orderEntry type="library" name="Maven: commons-net:commons-net:2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.8" level="project" />
     <orderEntry type="library" name="Maven: org.json4s:json4s-jackson_2.11:3.2.11" level="project" />
     <orderEntry type="library" name="Maven: org.json4s:json4s-core_2.11:3.2.11" level="project" />
     <orderEntry type="library" name="Maven: org.json4s:json4s-ast_2.11:3.2.11" level="project" />
@@ -147,5 +147,6 @@
     <orderEntry type="library" name="Maven: org.apache.spark:spark-tags_2.11:2.3.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-crypto:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.spark-project.spark:unused:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.8" level="project" />
   </component>
 </module>
