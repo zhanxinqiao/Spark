@@ -5,14 +5,14 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object Test05_PVUV {
   def main(args: Array[String]): Unit = {
-//    val conf: SparkConf = new SparkConf().setMaster("local").setAppName("PVUV")
-    val conf: SparkConf = new SparkConf().setAppName("PVUV")
+    val conf: SparkConf = new SparkConf().setMaster("local").setAppName("PVUV")
+//    val conf: SparkConf = new SparkConf().setAppName("PVUV")
     val sc: SparkContext = new SparkContext(conf)
     sc.setLogLevel("ERROR")
 
     //对网址 以及用户ID去重并统计
-    //    val file: RDD[String] = sc.textFile("data/jc_content_viewlog.txt")
-    val file: RDD[String] = sc.textFile("/tem/spark/jc_content_viewlog.txt")
+        val file: RDD[String] = sc.textFile("data/jc_content_viewlog.txt")
+//    val file: RDD[String] = sc.textFile("/tem/spark/jc_content_viewlog.txt")
     val value: RDD[(String, String, String)] = file.map(line => {
       val strings: Array[String] = line.split(",")
       //ID(序号):478896,网页ID:1043,网址:/jszx/1043.jhtml,用户ID:14884,缓存生成ID:F6D362B9AFAC436D153B7084EF3BA332,时间：2017-03-01 00:23:07
