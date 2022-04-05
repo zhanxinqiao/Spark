@@ -1,4 +1,5 @@
-package com.zxq.Scala
+package com.zxq.Spark
+
 //Scala实现回文数
 object Test01 {
   //方法一  用字符串
