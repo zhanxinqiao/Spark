@@ -13,8 +13,8 @@ object Test01_sql_basic {
     val session: SparkSession = SparkSession
       .builder()
       .config(conf) //这边也可以直接缩减代码为 .config(new SparkConf())
-      //      .appName("test") 如果①处只有new SparkConf() 后没有加setAppName则可以添加
-      //      .master("local") 如果①处只有new SparkConf() 后没有加setMaster则可以添加
+      //      .appName("test") 如果①处new SparkConf() 后没有加setAppName则可以添加
+      //      .master("local") 如果①处new SparkConf() 后没有加setMaster则可以添加
       //      .enableHiveSupport() 若开启这个选项 spark SQL on hive 才支持DDL,没开启,spark只有catalog
       .getOrCreate()
     val sc: SparkContext = session.sparkContext
@@ -23,7 +23,7 @@ object Test01_sql_basic {
     //以session 为主的操作演示
     //  DataFrame DataSet[Row]
     // SQL为中心
-    // catalog指的是注册表 即数据库的元数据
+    // catalog指的是注册表 即数据库的元数据(临时的库)
     val databases: Dataset[Database] = session.catalog.listDatabases() //列举出所有的数据库
     databases.show() //输出打印
     val tables: Dataset[Table] = session.catalog.listTables() //列举出默认库下所有的表
@@ -51,7 +51,7 @@ object Test01_sql_basic {
     val frame: DataFrame = session.sql("select * from ooxx")
     frame.show()
 
- //查询方法①  交互型
+ //查询方法②  交互型
 
     //导入scala的一个io库
     //追源码最后发现走的是new BufferedReader(new InputStreamReader(java.lang.System.in)))
