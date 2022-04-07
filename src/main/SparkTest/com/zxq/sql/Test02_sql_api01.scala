@@ -51,7 +51,7 @@ object Test02_sql_api01 {
     /**发现只有ooxx2这个表  之前创建的ooxx表不见了
      *代表createTempView创建的是在临时库中创建临时表 只在当前代码段中有效
      */
-    val tables: Unit = session.catalog.listTables().show()
+    session.catalog.listTables().show()
 
     val df: DataFrame = session.sql("select * from ooxx2")  //查询ooxx2表
     df.show()  //输出打印
