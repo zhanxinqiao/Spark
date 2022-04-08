@@ -3,7 +3,7 @@ package com.zxq.sql
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.types.{DataTypes, StructField, StructType}
 import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.sql.{DataFrame, Row, SaveMode, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, Encoders, Row, SaveMode, SparkSession}
 
 import java.sql.Struct
 import scala.beans.BeanProperty
@@ -225,5 +225,35 @@ object Test02_sql_api01 {
     val df2: DataFrame = session.createDataFrame(rddBean, classOf[Person])
     df2.show()
     df2.printSchema()
+
+    println("=============================================================")
+
+    val ds01: Dataset[String] = session.read.textFile("data/person.txt")
+    val person: Dataset[(String, Int)] = ds01.map(line => {
+      val strs: Array[String] = line.split(" ")
+      (strs(0), strs(1).toInt)
+      //Encoders :scala中的一种编码器  可对多种格式进行编码(eg:tuple,STRING,scalaInt等
+      // 相当于自定义类继承了Serializable)
+      //最终结果:在此处将一个RDD序列化为相应格式
+    })(Encoders.tuple(Encoders.STRING, Encoders.scalaInt))
+    //toDF:将此强类型数据集合转换为具有重命名列的通用DataFrame ,
+    //这在从元组的 RDD 转换为具有有意义名称的DataFrame时非常方便。
+    val cperson: DataFrame = person.toDF("name", "age")
+    cperson.show()
+    cperson.printSchema()
+
+    /*大数据整体操作流程:
+     *纯文本文件，不带自描述，string  不被待见的
+     * 必须转结构化  再参与计算
+     * 转换的过程可以由spark完成
+     *存储到hive数仓
+     *接数：源数据  不删除 不破坏
+     * ETL  中间态
+     *所有的计算发生在中间态
+     * 中间态 ==>  一切以后续计算成本为考量
+     * 选择文件格式类型
+     * 分区 / 分桶存放   避免发生数据倾斜
+    */
+
   }
 }
