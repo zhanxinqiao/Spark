@@ -39,8 +39,8 @@ object Test06_CalculateChange {
 //    zhangfu.foreach(println)
 
     //切割数据返回(时间格式的时间，还有收盘时间)
-    //    val data: RDD[ (String, Double)] = sc.textFile("data/000061.csv").filter(x => !x.contains("date")).map(y => {
-    val data: RDD[ (String, Double)] = sc.textFile("/tem/spark/000061.csv").filter(x => !x.contains("date")).map(y => {
+        val data: RDD[ (String, Double)] = sc.textFile("data/000061.csv").filter(x => !x.contains("date")).map(y => {
+//    val data: RDD[ (String, Double)] = sc.textFile("/tem/spark/000061.csv").filter(x => !x.contains("date")).map(y => {
       val data_split: Array[String] = y.split(",")
       val time: Date = fm.parse(data_split(0))
       //(时间,收盘价格)

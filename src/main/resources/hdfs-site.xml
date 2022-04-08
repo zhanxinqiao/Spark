@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+    <!--
+	
+	 <property>
+			<name>dfs.namenode.secondary.http-address</name>
+			<value>node1:50090</value>
+	</property>
+    <property>
+		<name>dfs.namenode.checkpoint.dir</name>
+		<value>file:///export/servers/hadoop-2.7.5/hadoopDatas/snn/name</value>
+	</property>
+
+	
+	-->
+	
+	<!-- 指定namenode的访问地址和端口 -->
+	<!--
+	<property>
+		<name>dfs.namenode.http-address</name>
+		<value>node1:50070</value>
+	</property>
+	-->
+	<!-- 一对多，逻辑到物理节点的映射-->
+	       <property> 
+			  <name>dfs.nameservices</name> 
+			  <value>mycluster</value> 
+		   </property>
+					   
+			<property> 
+			  <name>dfs.ha.namenodes.mycluster</name> 
+			  <value>nn1,nn2</value> 
+			</property>
+			<property> 
+			  <name>dfs.namenode.rpc-address.mycluster.nn1</name> 
+			  <value>node1:8020</value> 
+			</property> 
+			<property> 
+			  <name>dfs.namenode.rpc-address.mycluster.nn2</name> 
+			  <value>node2:8020</value> 
+			</property> 
+		
+			<property> 
+				<name>dfs.namenode.http-address.mycluster.nn1</name> 
+				  <value>node1:50070</value> 
+			</property> 
+			<property> 
+				  <name>dfs.namenode.http-address.mycluster.nn2</name> 
+				  <value>node2:50070</value> 
+			</property>
+			
+			<!-- 以下是JN在哪里启动，数据存那个磁盘的-->
+		    <property> 
+		      <name>dfs.namenode.shared.edits.dir</name> 
+		      <value>qjournal://node1:8485;node2:8485;node3:8485/mycluster</value> 
+		    </property>
+		    <property> 
+		      <name>dfs.journalnode.edits.dir</name> 
+		      <value>/export/servers/hadoop-2.7.5/ha/dfs/jn</value> 
+		    </property>
+			<!--HA角色切换的代理类和实现方法，是ssh免密方法-->
+			<property> 
+		        <name>dfs.client.failover.proxy.provider.mycluster</name>
+                <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+		    </property>
+	        <property> 
+                 <name>dfs.ha.fencing.methods</name> 
+                 <value>sshfence</value> 
+            </property> 
+			<property> 
+			   <name>dfs.ha.fencing.ssh.private-key-files</name> 
+			   <value>/root/.ssh/id_rsa</value> 
+			</property>
+        <!--开启自动化，启动zkfc进程-->
+			
+			<property> 
+		       <name>dfs.ha.automatic-failover.enabled</name> 
+		       <value>true</value> 
+		    </property>
+	<!-- 指定namenode元数据的存放位置 -->
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>file:///export/servers/hadoop-2.7.5/ha/dfs/name</value>
+	</property>
+	<!--  定义dataNode数据存储的节点位置，实际工作中，一般先确定磁盘的挂载目录，然后多个目录用，进行分割  -->
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>file:///export/servers/hadoop-2.7.5/ha/dfs/data</value>
+	</property>
+	
+	<!-- 指定namenode日志文件的存放目录 -->
+	<!--
+	<property>
+		<name>dfs.namenode.edits.dir</name>
+		<value>file:///export/servers/hadoop-2.7.5/hadoopDatas/nn/edits</value>
+	</property>
+	
+	<property>
+		<name>dfs.namenode.checkpoint.edits.dir</name>
+		<value>file:///export/servers/hadoop-2.7.5/hadoopDatas/dfs/snn/edits</value>
+	</property>
+	-->
+	<!-- 文件切片的副本个数-->
+	<property>
+		<name>dfs.replication</name>
+		<value>3</value>
+	</property>
+
+	<!-- 设置HDFS的文件权限-->
+	<property>
+		<name>dfs.permissions</name>
+		<value>false</value>
+	</property>
+
+	<!-- 设置一个文件切片的大小：128M-->
+	<property>
+		<name>dfs.blocksize</name>
+		<value>134217728</value>
+	</property>
+</configuration>

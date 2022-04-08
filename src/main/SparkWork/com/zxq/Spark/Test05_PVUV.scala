@@ -20,19 +20,13 @@ object Test05_PVUV {
       (strings(1), strings(3), strings(5)) //这里将接下来要用的 网址和用户ID 时间都取出来
     })
 
+    val Count_Page_path: Long = value.map(x => x._1).distinct().count()
     //对网页去重并统计
-    val Count_Page_path: Long = value.map(x => {
-      val distinct_Page_path: String = x._1.distinct
-      distinct_Page_path
-    }).count()
     println("对网址去重并统计:",Count_Page_path)
 
 
     //对用户去重并统计
-    val Count_Userid: Long = value.map(x => {
-      val distinct_Userid: String = x._2.distinct
-      distinct_Userid
-    }).count()
+    val Count_Userid: Long = value.map(x =>x._2).distinct().count()
     println("对用户去重并统计:",Count_Userid)
 
     //按月统计访问数量
