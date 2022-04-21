@@ -11,6 +11,6 @@ object Test02_WordCount {
     sc.setLogLevel("ERROR")
     val value: RDD[(String, Int)] = sc.textFile("hdfs://mycluster/tem/spark/word.txt").flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).filter(_._1!="")
     value.foreach(println)
-    value.saveAsTextFile("hdfs://mycluster/tem/spark/wordcount")
+//    value.saveAsTextFile("hdfs://mycluster/tem/spark/wordcount")
   }
 }
