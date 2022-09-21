@@ -19,7 +19,7 @@ object Test0_WordCount {
       x.split(" ")
     })
     val pairWord: RDD[(String, Int)] = words.map((x: String) => {
-      new Tuple2(x, 1)
+      Tuple2(x, 1)
     })
     val res: RDD[(String, Int)] = pairWord.reduceByKey((x, y) => {
       x + y

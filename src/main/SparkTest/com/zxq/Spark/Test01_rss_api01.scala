@@ -12,7 +12,7 @@ object Test01_rss_api01 {
     val dataRDD: RDD[Int] = context.parallelize(List(1, 2, 3, 4, 5, 4, 3, 2, 1))
     //1.过滤
     val value: RDD[Int] = dataRDD.filter(_ > 3)
-    val res01: Array[Int] = dataRDD.collect()
+    val res01: Array[Int] = dataRDD.collect() //返回一个数组，因为数组元素都会放在内存，故数组不可太大
     res01.foreach(println)
     println("----------------------")
     //用map去重
